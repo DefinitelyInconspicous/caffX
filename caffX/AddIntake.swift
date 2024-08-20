@@ -7,12 +7,43 @@
 
 import SwiftUI
 
+
+
 struct AddIntake: View {
+    @Binding var intakeGraph: [Int]
+    @State var selectedDate = Date()
+    @State var customDrink: String
+    @State private var selectedDrink = drink(name: "placeholder", caff: 0)
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Form {
+            Section {
+                DatePicker("Date", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
+                
+                
+                Picker("Drink", selection: $selectedDrink) {
+                    
+                    ForEach(drinkList) {item in
+                        Text(item.name + String(item.caff))
+                            .font(.headline)
+                            .padding()
+                    }
+                    
+                    
+                }
+            }
+            
+            if selectedDrink.name == "Custom" {
+                Section {
+                    TextField(text: $customDrink) {
+                        Text("Drink Name")
+                    }
+                }
+            }
+                
+            
+        }
     }
 }
-
 #Preview {
-    AddIntake()
+    AddIntake(intakeGraph: .constant([0]), customDrink:  "Drink Name")
 }
