@@ -11,7 +11,10 @@ import Charts
 
 struct ContentView: View {
     @State var caffIntake = [20,18,16,116,100,89,78,64,29,47]
+    @State var dates: [Date]
     @State var addIntake = false
+    @State var date: Date
+    
     var body: some View {
         NavigationStack {
             Text("Today's Intake")
@@ -20,7 +23,7 @@ struct ContentView: View {
             Chart {
                 ForEach(0..<caffIntake.count, id: \.self) { entry in
                     LineMark(
-                        x: .value("Hour",entry+1),
+                        x: .value("Hour", date ),
                         y: .value("Ca",caffIntake[entry])
                     )
                 
@@ -46,7 +49,9 @@ struct ContentView: View {
                 .navigationTitle("caffX")
                 .navigationBarTitleDisplayMode(.large)
                 .sheet(isPresented: $addIntake) {
-                    AddIntake(intakeGraph: $caffIntake, customDrink: "")
+                   
+                    AddIntake(intakeGraph: $caffIntake, date: $date, customDrink: "", selectedDrink: drink(name: "", caff: 0))
+                            .presentationDetents([.medium])
                 }
             
             Spacer()
@@ -56,5 +61,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(dates: [.now], date: .now)
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct caffXApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(dates: [.now], date: .now)
         }
     }
 }

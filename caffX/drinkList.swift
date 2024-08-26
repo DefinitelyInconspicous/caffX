@@ -16,7 +16,6 @@ struct drink: Hashable, Identifiable {
 var drinkList = [
     drink(name: "Espresso", caff: 64),
     drink(name: "Brewed Coffee", caff: 96),
-    drink(name: "Espresso", caff: 64),
     drink(name: "Instant Coffee", caff: 62),
     drink(name: "Black Tea", caff: 47),
     drink(name: "Green Tea", caff: 28),
